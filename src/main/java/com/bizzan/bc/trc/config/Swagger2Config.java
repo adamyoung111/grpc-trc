@@ -66,12 +66,12 @@ public class Swagger2Config {
         securityReferences.add(new SecurityReference("Authorization", authorizationScopes));
         return securityReferences;
     }
-//
-//    private Tag[] getTags() {
-//        Tag[] tags = {
-//                //new Tag("Invenntroller", "控件")
-//        };
-//        return tags;
-//    }
+
+    private Tag[] getTags() {
+        Tag[] tags = {
+                //new Tag("Invenntroller", "控件")
+        };
+        return tags;
+    }
 
 }
