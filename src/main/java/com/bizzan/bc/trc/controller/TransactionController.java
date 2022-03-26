@@ -8,7 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.tron.common.utils.ByteArray;
@@ -34,11 +33,6 @@ public class TransactionController {
     @RequestMapping("trc20Transaction" )
     private MessageResult trc20Transaction(@RequestBody TransactionDto transactionDto) {
         Trc20Service trc20Service = ActivitiConfig.getBean(Trc20Service.class);
-//        Map<String, BigDecimal> bigDecimalMap = trc20Service.getAccountSolidity(fromAddress);
-//        BigDecimal energy = bigDecimalMap.get("energy");
-//        Optional.ofNullable(energy).filter(aLong -> aLong.compareTo(BigDecimal.ONE) > 0).orElseThrow(() -> new RuntimeException("能量不足，请冻结TRX转换"));
-//        BigDecimal bandWidth = bigDecimalMap.get("bandWidth");
-//        Optional.ofNullable(bandWidth).filter(aLong -> aLong.compareTo(BigDecimal.ONE) > 0).orElseThrow(() -> new RuntimeException("带宽不足，请冻结TRX转换"));
         MessageResult messageResult;
         try {
             String txId = trc20Service.trc20Transaction(transactionDto.getToAddress(),transactionDto.getPrivateKey(),transactionDto.getFromAddress()

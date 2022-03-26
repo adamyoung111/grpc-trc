@@ -36,6 +36,7 @@ public class Trc20Service {
     private final BigDecimal conversion = new BigDecimal("1000000");
     @Value("${trc.privateKey}")
     private String privateKey;
+
     /***
      * trc20转账
      * @param toAddress
@@ -47,7 +48,7 @@ public class Trc20Service {
         ApiWrapper wrapper = ApiWrapper.ofMainnet(privateKey, apiKey);
         Contract contract = wrapper.getContract(contractAddress);
         Trc20Contract token = new Trc20Contract(contract, fromAddress, wrapper);
-        String result = token.transfer(toAddress, amount*1000000, 0, memo, feeLimit);
+        String result = token.transfer(toAddress, amount * 1000000, 0, memo, feeLimit);
         return result;
     }
 
@@ -80,8 +81,7 @@ public class Trc20Service {
      * @return
      * @throws IllegalException
      */
-    public String freezeBalance(String ownerAddress, long frozenBalance,
-                                long frozenDuration, int resourceCode, String receiveAddress) throws IllegalException {
+    public String freezeBalance(String ownerAddress, long frozenBalance, long frozenDuration, int resourceCode, String receiveAddress) throws IllegalException {
         ApiWrapper wrapper = ApiWrapper.ofMainnet(privateKey, apiKey);
         BigDecimal freezeAmount = BigDecimal.valueOf(frozenBalance).multiply(conversion);
         Response.TransactionExtention transactionExtention;
@@ -104,6 +104,7 @@ public class Trc20Service {
     public String unfreezeBalance(String ownerAddress, String privateKey, int resourceCode) throws IllegalException {
         ApiWrapper wrapper = ApiWrapper.ofMainnet(privateKey, apiKey);
         Response.TransactionExtention transactionExtention = wrapper.unfreezeBalance(ownerAddress, resourceCode);
+        BigDecimal bigDecimal = new BigDecimal("100");
         return getBroadcastTransaction(transactionExtention, wrapper);
     }
 
