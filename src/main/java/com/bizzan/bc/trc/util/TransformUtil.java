@@ -124,7 +124,7 @@ public class TransformUtil {
             sTemp = Integer.toHexString(0xFF & bArray[i]);
             if (sTemp.length() < 2)
                 sb.append(0);
-            sb.append(sTemp.toUpperCase());
+            sb.append(sTemp);
         }
         return sb.toString();
     }
@@ -299,8 +299,9 @@ public class TransformUtil {
 //        ApiWrapper.parseHex("0000000000000000000000000d0707963952f2fba59dd06f2b425ace40b492fe").toString();
         System.err.println(TypeDecoder.decodeAddress("0000000000000000000000000000000000000000000000000000000003567e00"));
         System.err.println(TypeDecoder.decodeAddress("0000000000000000000000000d0707963952f2fba59dd06f2b425ace40b492fe"));
-        System.err.println(TypeDecoder.decodeAddress("000000000000000000000000a3668dc100673b38ec5a3d11186c6be12cfb801f"));
-        Uint256 rawAmount = decodeNumeric("0000000000000000000000000000000000000000000000000000000003567e00", Uint256.class);
+        String data="a9059cbb0000000000000000000000415973edbc1d579c2d4e5f2f64bc04c7dbe50bf7a700000000000000000000000000000000000000000000000000000000033fda26";
+        System.err.println(TypeDecoder.decodeAddress(data.substring(8,72)));
+        Uint256 rawAmount = decodeNumeric(data.substring(73,136), Uint256.class);
         BigDecimal  amount = new BigDecimal(rawAmount.getValue()).divide(new BigDecimal("1000000"));
         System.err.println(amount);
 
